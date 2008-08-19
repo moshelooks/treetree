@@ -30,19 +30,25 @@
 using namespace std;
 using namespace TREE_TREE_NAMESPACE;
 
+void eat_whitespace() {
+  char c;
+  do {
+    cin >> c;    
+  } while (cin && _tree_io_private::whitespace(c));
+  cin.putback(c);
+}
+
 int main(int argc,char** argv) {
   tree<string> tr;
+  eat_whitespace();
   while (cin) {
     if (cin.peek()=='(') {
       cin >> sexpr_format(tr);
-      if (!cin)
-        break;
       cout << tr << endl;
     } else {
       cin >> tr;
-      if (!cin)
-        break;
       cout << sexpr_format(tr) << endl;
     }
+    eat_whitespace();
   }
 }
