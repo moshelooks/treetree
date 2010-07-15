@@ -28,6 +28,7 @@
 #include <istream>
 #include <ostream>
 #include <string>
+#include <stdexcept>
 #include <boost/spirit/core.hpp>
 #include <boost/lexical_cast.hpp>
 #include "tree.hpp"

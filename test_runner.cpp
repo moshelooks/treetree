@@ -883,4 +883,24 @@ test_case(tree_in_sexpr) {
   check_eq(tmpYYY,tr2);
 }
 
+struct Simple {
+  static vector<int> record;
+  Simple(int n) : _n(n) { }
+  ~Simple() { ++record[_n]; }
+  int _n;
+};
+
+vector<int> Simple::record;
+
+test_case(tree_node_destructor) {
+  Simple::record=vector<int>(8,0);
+  tree<Simple> tree_simple = 
+      tree_of(Simple(7))(tree_of(Simple(0))(Simple(1),Simple(2)),Simple(3),
+                         tree_of(Simple(4))(Simple(5),Simple(6)));
+  vector<int> tmp=Simple::record;
+  tree_simple.clear();
+  for (int i=0;i<8;++i)
+    check_eq(tmp[i]+1,Simple::record[i]);
+}
+
 /// EOF ///
