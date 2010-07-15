@@ -631,11 +631,16 @@ struct mutable_tr : public tr<T,Tree> {
     node_base* nprev=n->prev;
     n->left_cut(l._node);
     for (node_base* m=erase_descend(n);m!=final;) {
-      n=m->dereferenceable() ? erase_descend(m->next) : m->next;
-      delete m;
+      if (m->dereferenceable()) {
+        n=erase_descend(m->next);
+        delete static_cast<node<T>*>(m);
+      } else {
+        n=m->next;
+        delete m;
+      }
       m=n;
     }
-    delete final;
+    delete static_cast<node<T>*>(final);
     l._node->prev=nprev;
   }
 
@@ -785,13 +790,18 @@ struct mutable_tr : public tr<T,Tree> {
     assert(n->dereferenceable());
 
     for (node_base* m=erase_descend(n);m!=n;) {
-      node_base* tmp=m->dereferenceable() ? erase_descend(m->next) : m->next;
-      delete m;
+      node_base* tmp=m->next;
+      if (m->dereferenceable()) {
+        tmp=erase_descend(tmp);
+        delete static_cast<node<T>*>(m);
+      } else {
+        delete m;
+      }
       m=tmp;
     }
 
     n->cut_out();
-    delete n;
+    delete static_cast<node<T>*>(n);
   }
 };
 
