@@ -1019,7 +1019,7 @@ struct tree : public _tree_private::mutable_tr<T,tree<T> > {
   template<typename OtherTr>
   void init(const OtherTr& other) {
     if (!other.empty())
-      insert(this->end(),other.root_sub());
+      this->insert(this->end(),other.root_sub());
   }
 };
 
