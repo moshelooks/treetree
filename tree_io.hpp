@@ -24,12 +24,14 @@
 #ifndef _TREE_TREE_IO_HPP_
 #define _TREE_TREE_IO_HPP_
 
+#define BOOST_SPIRIT_USE_OLD_NAMESPACE	1
+
 #include <algorithm>
 #include <istream>
 #include <ostream>
 #include <string>
 #include <stdexcept>
-#include <boost/spirit/core.hpp>
+#include <boost/spirit/include/classic.hpp>
 #include <boost/lexical_cast.hpp>
 #include "tree.hpp"
 
