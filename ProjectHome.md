@@ -1,0 +1,5 @@
+Treetree is a header-only C++ library that implements a generic tree-structured container class according to STL conventions, as well as properly overloaded `operator>>` for input and `operator<<` for output.
+
+The underlying data structure generalizes a doubly linked list - in addition to previous and next pointers, tree nodes contain a third pointer to the list of their children. The implementation is efficient, and the API is expressive. Treetree is useful for representing anything that one would use S-expressions for in Lisp (inference trees, programs, etc.).
+
+You can iterate over the contents of a tree in pre- or post-order, iterate over the children of a particular node only, or iterate over leaves only. The same options are available for iteration over _subtrees_ (e.g. the subtrees of `f(g(x, y) z)`, in pre-order, are `f(g(x, y) z)`, `g(x, y)`, `x`, `y`, and `z`).
